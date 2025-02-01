@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 import { schemaLogin } from './schema'
 import { FormLoginProps } from './types'
 
-export const LoginPage: React.FC = () => {
+export const RegisterPage: React.FC = () => {
   const {
     handleSubmit,
     register,
@@ -39,20 +39,20 @@ export const LoginPage: React.FC = () => {
             Pizza Food Delivery © {new Date().getFullYear()}{' '}
           </p>
         </section>
-        <section className="max-md: flex flex-col justify-between p-2 max-md:bg-red-500 max-md:p-6">
+        <section className="max-md: flex flex-col items-center justify-between p-2 max-md:bg-red-500 max-md:p-6">
           <Pizza size={100} className="text-white" />
           <div className="m-auto text-center">
             <h1 className="pb-2 text-3xl font-bold max-md:text-white">
-              Acesse seu painel administrativo
+              Crie uma conta grátis agora
             </h1>
             <p className="mb-4 text-pretty text-lg text-muted-foreground max-md:text-zinc-100">
-              Acompanhe seus pedidos e vendas
+              Tenha acesso a seus pedidos e acompanhe suas vendas em tempo real
             </p>
             <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit(handleSubmitForm)}>
               <div className="flex flex-col gap-2">
                 <Input
                   className={`h-12 text-lg max-md:bg-white ${!dirtyFields.email ? 'border-zinc-900' : dirtyFields.email && !isValid ? 'border-red-700' : 'border-green-700'}`}
-                  placeholder="Digite o seu email cadastrado aqui"
+                  placeholder="Qual seu e-mail?"
                   {...register('email')}
                 />
                 {errors.email && (
@@ -60,14 +60,15 @@ export const LoginPage: React.FC = () => {
                 )}
               </div>
               <Button
-                className="h-12 w-full text-lg max-md:bg-gray-900"
+                className="flex h-12 w-full items-center justify-center text-lg max-md:bg-gray-900"
                 disabled={isSubmitting || !isValid}
               >
                 {isSubmitting ? (
                   <LoaderCircle className="animate-spin" size={40} />
                 ) : (
                   <>
-                    Entrar <ArrowRight className="mt-1" />
+                    Cadastrar agora
+                    <ArrowRight size={40} className="mt-1" />
                   </>
                 )}
               </Button>
