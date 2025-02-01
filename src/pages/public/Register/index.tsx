@@ -8,23 +8,23 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import { schemaLogin } from './schema'
-import { FormLoginProps } from './types'
+import { schemaRegister } from './schema'
+import { FormRegisterProps } from './types'
 
 export const RegisterPage: React.FC = () => {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting, isValid, dirtyFields },
-  } = useForm<FormLoginProps>({
-    resolver: zodResolver(schemaLogin),
+  } = useForm<FormRegisterProps>({
+    resolver: zodResolver(schemaRegister),
     mode: 'onChange',
   })
 
-  const handleSubmitForm = async (data: FormLoginProps) => {
+  const handleSubmitForm = async (data: FormRegisterProps) => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
     toast.success('Para finalizar, clique no link que você recebeu em seu e-mail :)')
-    console.log(data.email)
+    console.log(data)
   }
 
   return (
@@ -51,12 +51,43 @@ export const RegisterPage: React.FC = () => {
             <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit(handleSubmitForm)}>
               <div className="flex flex-col gap-2">
                 <Input
-                  className={`h-12 text-lg max-md:bg-white ${!dirtyFields.email ? 'border-zinc-900' : dirtyFields.email && !isValid ? 'border-red-700' : 'border-green-700'}`}
+                  className={`h-12 text-lg max-md:bg-white ${!dirtyFields.nameShop ? 'border-zinc-900' : dirtyFields.nameShop && errors.nameShop ? 'border-red-700' : 'border-green-700'}`}
+                  placeholder="Nome do seu estabelecimento"
+                  {...register('nameShop')}
+                />
+                {errors.nameShop && (
+                  <p className="text-left text-xs text-red-500">{errors.nameShop.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Input
+                  className={`h-12 text-lg max-md:bg-white ${!dirtyFields.nameManager ? 'border-zinc-900' : dirtyFields.nameManager && errors.nameManager ? 'border-red-700' : 'border-green-700'}`}
+                  placeholder="Nome do Responsável"
+                  {...register('nameManager')}
+                />
+                {errors.nameManager && (
+                  <p className="text-left text-xs text-red-500">{errors.nameManager?.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Input
+                  className={`h-12 text-lg max-md:bg-white ${!dirtyFields.email ? 'border-zinc-900' : dirtyFields.email && errors.email ? 'border-red-700' : 'border-green-700'}`}
                   placeholder="Qual seu e-mail?"
                   {...register('email')}
                 />
                 {errors.email && (
                   <p className="text-left text-xs text-red-500">{errors.email.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Input
+                  className={`h-12 text-lg max-md:bg-white ${!dirtyFields.phone ? 'border-zinc-900' : dirtyFields.phone && errors.phone ? 'border-red-700' : 'border-green-700'}`}
+                  placeholder="Qual seu telefone?"
+                  type="number"
+                  {...register('phone')}
+                />
+                {errors.phone && (
+                  <p className="text-left text-xs text-red-500">{errors.phone?.message}</p>
                 )}
               </div>
               <Button

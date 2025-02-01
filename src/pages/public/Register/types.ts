@@ -1,5 +1,5 @@
 import { z } from 'zod'
 
-import { schemaLogin } from './schema'
+import { schemaRegister } from './schema'
 
-export type FormLoginProps = z.infer<typeof schemaLogin>
+export type FormRegisterProps = z.infer<typeof schemaRegister>
