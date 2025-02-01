@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight, Pizza } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -20,7 +21,9 @@ export const LoginPage: React.FC = () => {
     mode: 'onChange',
   })
 
-  const handleSubmitForm = (data: FormLoginProps) => {
+  const handleSubmitForm = async (data: FormLoginProps) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    toast.success('Para finalizar, clique no link que você recebeu em seu e-mail :)')
     console.log(data.email)
   }
 
